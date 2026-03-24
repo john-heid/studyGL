@@ -9,6 +9,7 @@
 #include "Renderer.h"
 
 #include "VertexBuffer.h"
+#include "VertexBufferLayout.h"
 #include "IndexBuffer.h"
 #include "VertexArray.h"
 #include "Shader.h"
@@ -83,11 +84,11 @@ int main()
         ib.Unbind();
         shader.Unbind();
 
+        Renderer renderer{};
+
+
         float r = 0.0f;
         float increment = 0.05f;
-
-
-        
         //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
         // render loop
@@ -99,16 +100,12 @@ int main()
 
             // render
             // ------
-            GLCall(glClear(GL_COLOR_BUFFER_BIT));
+            renderer.Clear();
 
-
-            // draw our first triangle
             shader.Bind();
             shader.SetUniform4f("u_Color", r, 0.3f, 0.8f, 1.0f);
 
-            va.Bind();
-            ib.Bind();
-
+            renderer.Draw(va, ib, shader);
             GLCall(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
 
             if (r > 1.0f)

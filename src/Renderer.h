@@ -2,6 +2,10 @@
 
 #include <glad/glad.h>
 
+#include "VertexArray.h"
+#include "IndexBuffer.h"
+#include "Shader.h"
+
 
 // instrinsic to compiler: the __ lets use know that its intrinsic to msvc. Apparently only sort of
 #define ASSERT(x) if (!(x)) __debugbreak();
@@ -18,3 +22,15 @@
 void GLClearError();
 
 bool GLLogCall(const char* function, const char* file, int line);
+
+class Renderer
+{
+private:
+
+public:
+    void Clear() const;
+    void Draw(const VertexArray& a, const IndexBuffer& ib, const Shader& shader) const;
+
+
+
+};
